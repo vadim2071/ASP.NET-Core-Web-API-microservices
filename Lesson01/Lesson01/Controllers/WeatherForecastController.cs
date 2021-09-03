@@ -5,35 +5,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lesson01
+namespace Lesson01.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly List<TempTime> _holder;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(List<TempTime>  holder)
         {
-            _logger = logger;
+            _holder = holder;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Read()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Ok(_holder.OrderBy(t => t.time));
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] TempTime newInput)
+        {
+            if (_holder.TrueForAll(t => newInput.time != t.time))
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                _holder.Add(newInput);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        
+        [HttpPut]
+        public IActionResult Update([FromQuery] DateTime timeToUpdate, [FromQuery] int newTempValue)
+        {
+            for (int i = 0; i < _holder.Count; i++)
+            {
+                if (_holder[i].time == timeToUpdate)
+                    _holder[i].temp = newTempValue;
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete([FromQuery] TempTime recordToDelete)
+        {
+            if (_holder.TrueForAll(t => recordToDelete.time == t.time))
+            {
+                _holder.Remove(recordToDelete);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

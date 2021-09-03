@@ -35,7 +35,7 @@ namespace Lesson01
         {
 
             services.AddControllers();
-            services.AddSingleton<ValuesHolder>(); //нужно зарегистрировать 
+            //services.AddSingleton<ValuesHolder>(); //нужно зарегистрировать 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lesson01", Version = "v1" });
