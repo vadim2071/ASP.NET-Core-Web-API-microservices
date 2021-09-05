@@ -1,3 +1,4 @@
+using Lesson01.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,13 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-// Ќаписать свой контроллер и методы в нем, которые бы предоставл€ли следующую функциональность
-// ¬озможность сохранить температуру в указанное врем€
-// ¬озможность отредактировать показатель температуры в указанное врем€
-// ¬озможность удалить показатель температуры в указанный промежуток времени
-// ¬озможность прочитать список показателей температуры за указанный промежуток времени
-
 
 namespace Lesson01
 {
@@ -35,7 +29,7 @@ namespace Lesson01
         {
 
             services.AddControllers();
-            //services.AddSingleton<ValuesHolder>(); //нужно зарегистрировать 
+            services.AddSingleton<ValuesHolder>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lesson01", Version = "v1" });

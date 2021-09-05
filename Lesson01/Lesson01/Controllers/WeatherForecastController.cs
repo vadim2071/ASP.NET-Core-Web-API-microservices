@@ -11,61 +11,45 @@ namespace Lesson01.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly List<WeatherForecast> _holder;
 
-        public WeatherForecastController(List<WeatherForecast>  holder)
+        private readonly ValuesHolder _holder;
+
+        public WeatherForecastController(ValuesHolder holder)
         {
             _holder = holder;
         }
 
-
         [HttpGet]
         public IActionResult Read()
         {
-            if (_holder.Count != 0) return Ok(_holder.OrderBy(t => t.Date));
-            else return NotFound();
-
+            return Ok(_holder.Values.OrderBy(d => d.Summary));
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] WeatherForecast newInput)
+        public IActionResult Create([FromBody] WeatherForecast input)
         {
-            if (_holder.TrueForAll(t => newInput.Date != t.Date))
-            {
-                _holder.Add(newInput);
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            _holder.Values.Add(input.Summary); //почему-то разрешает только string
+            return Ok();
         }
 
-        
+       
         [HttpPut]
-        public IActionResult Update([FromQuery] DateTime timeToUpdate, [FromQuery] int newTempValue)
+        public IActionResult Update([FromQuery] string stringsToUpdate, [FromQuery] string newValue)
         {
-            for (int i = 0; i < _holder.Count; i++)
+            for (int i = 0; i < _holder.Values.Count; i++)
             {
-                if (_holder[i].Date == timeToUpdate)
-                    _holder[i].TemperatureC = newTempValue;
+                if (_holder.Values[i] == stringsToUpdate)
+                    _holder.Values[i] = newValue;
             }
 
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromQuery] WeatherForecast recordToDelete)
+        public IActionResult Delete([FromQuery] string stringsToDelete)
         {
-            if (_holder.TrueForAll(t => recordToDelete.Date == t.Date))
-            {
-                _holder.Remove(recordToDelete);
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            _holder.Values = _holder.Values.Where(w => w != stringsToDelete).ToList();
+            return Ok();
         }
     }
 }
