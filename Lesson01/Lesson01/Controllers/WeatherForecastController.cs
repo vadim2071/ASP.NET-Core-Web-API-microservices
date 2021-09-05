@@ -11,23 +11,26 @@ namespace Lesson01.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly List<TempTime> _holder;
+        private readonly List<WeatherForecast> _holder;
 
-        public WeatherForecastController(List<TempTime>  holder)
+        public WeatherForecastController(List<WeatherForecast>  holder)
         {
             _holder = holder;
         }
 
+
         [HttpGet]
         public IActionResult Read()
         {
-            return Ok(_holder.OrderBy(t => t.time));
+            if (_holder.Count != 0) return Ok(_holder.OrderBy(t => t.Date));
+            else return NotFound();
+
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] TempTime newInput)
+        public IActionResult Create([FromBody] WeatherForecast newInput)
         {
-            if (_holder.TrueForAll(t => newInput.time != t.time))
+            if (_holder.TrueForAll(t => newInput.Date != t.Date))
             {
                 _holder.Add(newInput);
                 return Ok();
@@ -44,17 +47,17 @@ namespace Lesson01.Controllers
         {
             for (int i = 0; i < _holder.Count; i++)
             {
-                if (_holder[i].time == timeToUpdate)
-                    _holder[i].temp = newTempValue;
+                if (_holder[i].Date == timeToUpdate)
+                    _holder[i].TemperatureC = newTempValue;
             }
 
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromQuery] TempTime recordToDelete)
+        public IActionResult Delete([FromQuery] WeatherForecast recordToDelete)
         {
-            if (_holder.TrueForAll(t => recordToDelete.time == t.time))
+            if (_holder.TrueForAll(t => recordToDelete.Date == t.Date))
             {
                 _holder.Remove(recordToDelete);
                 return Ok();
