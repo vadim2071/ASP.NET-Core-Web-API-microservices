@@ -12,17 +12,11 @@ namespace Lesson02.Controllers
         [ApiController]
         public class NetworkController : ControllerBase
         {
-            public IActionResult GetHi()
-            {
-                return Ok("Hi, i am ram controller");
-            }
-
             [HttpGet("agent/{agentId}")]
             public IActionResult GetMetricsFromAgent([FromRoute] int agentId)
             {
                 return Ok();
             }
-
         }
     }
 }

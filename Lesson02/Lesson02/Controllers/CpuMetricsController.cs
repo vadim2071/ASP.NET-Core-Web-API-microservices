@@ -10,11 +10,6 @@ namespace Lesson02.Controllers
     [ApiController]
     public class CpuMetricsController : ControllerBase
     {
-        public IActionResult GetHi()
-        {
-            return Ok("Hi, i am cpu controller");
-        }
-
         [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {

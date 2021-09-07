@@ -10,17 +10,10 @@ namespace Lesson02.Controllers
     [ApiController]
     public class HddMetricsController : ControllerBase
     {
-
-        public IActionResult GetHi()
-        {
-            return Ok("Hi, i am hdd controller");
-        }
-
         [HttpGet("agent/{agentId}")]
         public IActionResult GetMetricsFromAgent([FromRoute] int agentId)
         {
             return Ok();
         }
-
     }
 }
