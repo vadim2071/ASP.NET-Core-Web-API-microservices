@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lesson02.Controllers
 {
-    public class RamController : ControllerBase
+    public class RamMetricsController : ControllerBase
     {
-        [Route("api/metrics/ram/available")]
+        [Route("api/metrics/ram/available/[controller]")]
         [ApiController]
         public class NetworkController : ControllerBase
         {

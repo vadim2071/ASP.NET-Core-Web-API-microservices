@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lesson02.Controllers
 {
-    [Route("api/metrics/hdd/left")]
+    [Route("api/metrics/hdd/left/[controller]")]
     [ApiController]
-    public class HddController : ControllerBase
+    public class HddMetricsController : ControllerBase
     {
 
         public IActionResult GetHi()

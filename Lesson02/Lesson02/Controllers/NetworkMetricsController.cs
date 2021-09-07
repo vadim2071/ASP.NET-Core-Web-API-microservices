@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lesson02.Controllers
 {
-    [Route("api/metrics/network")]
+    [Route("api/metrics/network/[controller]")]
     [ApiController]
-    public class NetworkController : ControllerBase
+    public class NetworkMetricsController : ControllerBase
     {
         public IActionResult GetHi()
         {

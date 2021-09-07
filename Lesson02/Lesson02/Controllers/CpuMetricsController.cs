@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lesson02.Controllers
 {
-    [Route("api/metrics/cpu")]
+    [Route("api/metrics/cpu/[controller]")]
     [ApiController]
     public class CpuMetricsController : ControllerBase
     {

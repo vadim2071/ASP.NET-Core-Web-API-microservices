@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lesson02.Controllers
 {
-    [Route("api/metrics/dotnet/errors-count")]
+    [Route("api/metrics/dotnet/errors-count/[controller]")]
     [ApiController]
     public class DotNetMetricsController : ControllerBase
     {
