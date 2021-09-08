@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace Lesson02.Controllers
 {
-    public class RamMetricsController : ControllerBase
-    {
         [Route("api/metrics/ram/available/[controller]")]
         [ApiController]
-        public class NetworkController : ControllerBase
+        public class RamMetricsController : ControllerBase
         {
-            [HttpGet("agent/{agentId}")]
-            public IActionResult GetMetricsFromAgent([FromRoute] int agentId)
+            [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}")]
+            public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
             {
                 return Ok();
             }
         }
-    }
 }

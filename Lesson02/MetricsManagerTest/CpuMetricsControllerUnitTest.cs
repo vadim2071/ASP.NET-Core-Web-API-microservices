@@ -15,7 +15,7 @@ namespace MetricsManagerTest
         }
                 
         [Fact]
-        public void GetMetricsFromAgent_ReturnOk()
+        public void GetMetricsFromAgent()
         {
             //Arrange
             var agentId = 1;
@@ -27,7 +27,22 @@ namespace MetricsManagerTest
 
             //Assert
 
-            _ = Assert.IsAssignableFrom<IActionResult>(result);
+            Assert.IsAssignableFrom<IActionResult>(result);
+        }
+
+        [Fact]
+        public void GetMetricsFromAllCluster()
+        {
+            //Arrange
+            var fromTime = TimeSpan.FromSeconds(0);
+            var toTime = TimeSpan.FromSeconds(100);
+
+            //Act
+            var result = controller.GetMetricsFromAllCluster(fromTime, toTime);
+
+            //Assert
+
+            Assert.IsAssignableFrom<IActionResult>(result);
         }
 
     }

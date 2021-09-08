@@ -33,9 +33,3 @@ namespace Lesson02.Controllers
     {
          public Uri AgentAddress { get; }
     }
-
- 
-
-         
-      
-
