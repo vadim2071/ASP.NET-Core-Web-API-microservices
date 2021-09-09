@@ -45,5 +45,21 @@ namespace MetricsManagerTest
             Assert.IsAssignableFrom<IActionResult>(result);
         }
 
+        [Fact]
+        public void GetMetricsFromAgentPercentile()
+        {
+            //Arrange
+            var agentId = 1;
+            var fromTime = TimeSpan.FromSeconds(0);
+            var toTime = TimeSpan.FromSeconds(100);
+            var percentile = 25;
+
+            //Act
+            var result = controller.GetMetricsFromAgentPercentile(agentId, fromTime, toTime, percentile);
+
+            //Assert
+
+            Assert.IsAssignableFrom<IActionResult>(result);
+        }
     }
 }

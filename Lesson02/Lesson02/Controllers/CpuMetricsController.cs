@@ -21,5 +21,11 @@ namespace Lesson02.Controllers
         {
             return Ok();
         }
+
+        [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}/percentiles/{percentile}")]
+        public IActionResult GetMetricsFromAgentPercentile([FromRoute] int agenId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime, [FromRoute] int percentile)
+        {
+            return Ok();
+        }
     }
 }
