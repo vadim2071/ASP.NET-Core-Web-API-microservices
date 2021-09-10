@@ -1,28 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Data.SQLite;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MetricsAgent.Controllers
+namespace Lesson03.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/metrics/cpu/[controller]")]
     [ApiController]
     public class CpuMetricsController : ControllerBase
     {
-        [HttpGet("sql-test")]
-        public IActionResult TryToSqlLite()
+        [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}")]
+        public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {
-            string cs = "Data Source=:memory:";
-            string stm = "SELECT SQLITE_VERSION()";
+            return Ok();
+        }
 
+        [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
+        public IActionResult GetMetricsFromAllCluster([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        {
+            return Ok();
+        }
 
-            using (var con = new SQLiteConnection(cs))
-            {
-                con.Open();
-
-                using var cmd = new SQLiteCommand(stm, con);
-                string version = cmd.ExecuteScalar().ToString();
-
-                return Ok(version);
-            }
+        [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}/percentiles/{percentile}")]
+        public IActionResult GetMetricsFromAgentPercentile([FromRoute] int agenId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime, [FromRoute] int percentile)
+        {
+            return Ok();
         }
     }
 }
