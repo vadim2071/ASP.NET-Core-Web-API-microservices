@@ -31,8 +31,14 @@ namespace Lesson02.Controllers
 
     public class AgentInfo
     {
-        public int AgentId { get; }
+        public int AgentId { get; set; }
 
-        public Uri AgentAddress { get; }
+        public Uri AgentAddress { get; set; }
+
+        public AgentInfo (int _agentId, Uri _agentAdress)
+        {
+            AgentId = _agentId;
+            AgentAddress = _agentAdress;
+        }
     }
 }

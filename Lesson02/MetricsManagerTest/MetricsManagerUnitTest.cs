@@ -19,10 +19,8 @@ namespace MetricsManagerTest
         public void RegisterAgent()
         {
             //Arrange
-            var agentInfo = (1, 192.168.1.5);
-            //var AgentInfo agentInfo = new AgentInfo ( 1, https://localhost);
 
-
+            var agentInfo = new AgentInfo(1, new Uri ("https://kjnsdjkfs.com/"));
 
             //Act
             var result = controller.RegisterAgent(agentInfo);
