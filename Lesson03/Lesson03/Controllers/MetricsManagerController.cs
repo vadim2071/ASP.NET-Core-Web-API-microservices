@@ -8,7 +8,7 @@ namespace Lesson03.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AgentController : ControllerBase
+    public class MetricsManagerController : ControllerBase
     {
         [HttpPost("register")]
         public IActionResult RegisterAgent([FromBody] AgentInfo agentInfo)
@@ -35,7 +35,7 @@ namespace Lesson03.Controllers
 
         public Uri AgentAddress { get; set; }
 
-        public AgentInfo (int _agentId, Uri _agentAdress)
+        public AgentInfo(int _agentId, Uri _agentAdress)
         {
             AgentId = _agentId;
             AgentAddress = _agentAdress;
