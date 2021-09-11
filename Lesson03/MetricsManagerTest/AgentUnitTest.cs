@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetricsManagerTest
 {
-    public class MetricsManagerUnitTest
+    public class AgentUnitTest
     {
 
-        private MetricsManagerController controller;
+        private AgentController controller;
 
-        public MetricsManagerUnitTest()
+        public AgentUnitTest()
         {
-            controller = new MetricsManagerController();
+            controller = new AgentController();
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace MetricsManagerTest
         {
             //Arrange
 
-            var agentInfo = new AgentInfo(1, new Uri("https://kjnsdjkfs.com/"));
+            var agentInfo = new AgentCreateDto(1, new Uri("https://kjnsdjkfs.com/"));
 
             //Act
             var result = controller.RegisterAgent(agentInfo);

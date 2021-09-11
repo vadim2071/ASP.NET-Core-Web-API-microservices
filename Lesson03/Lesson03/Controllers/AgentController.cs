@@ -8,10 +8,10 @@ namespace Lesson03.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MetricsManagerController : ControllerBase
+    public class AgentController : ControllerBase
     {
         [HttpPost("register")]
-        public IActionResult RegisterAgent([FromBody] AgentInfo agentInfo)
+        public IActionResult RegisterAgent([FromBody] AgentCreateDto agentInfo)
         {
             return Ok();
         }
@@ -29,13 +29,13 @@ namespace Lesson03.Controllers
         }
     }
 
-    public class AgentInfo
+    public class AgentCreateDto
     {
         public int AgentId { get; set; }
 
         public Uri AgentAddress { get; set; }
 
-        public AgentInfo(int _agentId, Uri _agentAdress)
+        public AgentCreateDto(int _agentId, Uri _agentAdress)
         {
             AgentId = _agentId;
             AgentAddress = _agentAdress;
